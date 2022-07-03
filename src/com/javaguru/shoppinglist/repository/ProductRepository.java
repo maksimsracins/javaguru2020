@@ -2,9 +2,12 @@ package shoppinglist.repository;
 
 import shoppinglist.domain.Product;
 
+import java.util.List;
+import java.util.Optional;
+
 public interface ProductRepository {
 
     Product addProduct(Product product);
-    Product findProductById(Long id);
-
+    Optional<Product> findProductById(Long id);
+    List<Product> listOfAllProducts();
 }
