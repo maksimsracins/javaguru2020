@@ -12,11 +12,14 @@ public class ConsoleUI {
 
     private ProductService productService;
     private ShoppingCartService shoppingCartService;
+    private ShoppingCartMenu shoppingCartMenu;
 
     public ConsoleUI(ProductService productService,
-                     ShoppingCartService shoppingCartService){
+                     ShoppingCartService shoppingCartService,
+                     ShoppingCartMenu shoppingCartMenu){
         this.productService = productService;
         this.shoppingCartService = shoppingCartService;
+        this.shoppingCartMenu = shoppingCartMenu;
     }
 
     public void start(){
@@ -27,8 +30,11 @@ public class ConsoleUI {
             try{
                 System.out.println("1. Create product.");
                 System.out.println("2. Find product by id.");
-                System.out.println("3. Get list of products.");
+                System.out.println("3. Go to shopping cart.");
                 System.out.println("4. Exit");
+
+
+
                 scanner.nextLine();
                 int userInput = Integer.parseInt(scanner.nextLine());
 
@@ -58,9 +64,29 @@ public class ConsoleUI {
                         System.out.println("Your product:" + foundProduct);
                         break;
                     case 3:
+                        if (productService.retrieveAllProducts().isEmpty()){
+                            System.out.println("No items. Please add them.");
+                        } else{
+                            if (shoppingCartService.retrieveAllProduct().isEmpty()){
+                                System.out.println("Shopping cart is empty.");
+                                System.out.println("Please see products below: \n");
+                                shoppingCartService.retrieveAllProduct();
+                            } else{
+                                System.out.println("Please see products below: \n");
+                                shoppingCartService.retrieveAllProduct();
+                            }
+                            int userInputShoppingList = shoppingCartMenu.executeMenu();
+
+                            if (userInputShoppingList == 1){
+                                
+                            } else if (userInputShoppingList == 2){
+
+                            } else if (userInputShoppingList == 3){
+
+                            }
+                        }
 
                         break;
-
                         case 4:
                         System.out.println(System.out);
                         break;
