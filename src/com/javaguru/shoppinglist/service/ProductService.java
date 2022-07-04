@@ -25,5 +25,8 @@ public class ProductService {
        return productInMemoryRepository.findProductById(id)
                .orElseThrow(() -> new ProductNotFoundException("Product not found, id: " + id));
     }
+    public List<Product> retrieveAllProducts(){
+        return productInMemoryRepository.listOfAllProducts();
+    }
 
 }
